@@ -9,7 +9,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.Collection;
+import java.util.Collections;
 //import springfox.documentation.builders.PathSelectors;
 //import springfox.documentation.builders.RequestHandlerSelectors;
 //import springfox.documentation.spi.DocumentationType;
@@ -26,22 +34,41 @@ public class BookStoreBackendApplication {
         log.info("BookStore Application started at {} Environment", applicationContext.getEnvironment().getProperty("environment"));
     }
 
-//    //ModelMapper Bean created
-//    @Bean
-//    public ModelMapper modelMapper(){
-//        return new ModelMapper();
-//    }
+    //ModelMapper Bean created
+    @Bean
+    public ModelMapper modelMapper(){
+        return new ModelMapper();
+    }
 
-//    //PasswordEncoder Bean created
-//    @Bean
-//    public PasswordEncoder passwordEncoder(){
-//        return new BCryptPasswordEncoder();
-//    }
+    //PasswordEncoder Bean created
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 
-//    @Bean
-//    public Docket api() {
-//        return new Docket(DocumentationType.SWAGGER_2)
-//                .select()
-//                .apis(RequestHandlerSelectors.basePackage("com.bridgelabz.bookstorebackend")).paths(PathSelectors.any()).build();
-//    }
+    //Docket Bean to do Swagger Configuration
+    @Bean
+    public Docket swaggerConfiguration(){
+    //Return a prepared Docket instance
+    return new Docket(DocumentationType.SWAGGER_2)
+            .select()
+            .paths(PathSelectors.any())
+            .apis(RequestHandlerSelectors.basePackage("com.bridgelabz.bookstorebackend"))
+            .build()
+            .apiInfo(apiMataData());
+    }
+
+    //Returns application metadata to swagger-ui
+    public ApiInfo apiMataData(){
+        return new ApiInfo(
+                "BookStore API",
+                "Free to use",
+                "1.0",
+                "",
+                new springfox.documentation.service.Contact("Nikita Amar", "abc.com", "amaenikita09@gmail.com"),
+                "API LICENCE",
+                "amarnikita09@gmail.com",
+                Collections.emptyList()
+                );
+      }
 }
