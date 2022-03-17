@@ -86,12 +86,13 @@
             <artifactId>spring-security-crypto</artifactId>
             <version>5.5.2</version>
         </dependency>
-
+        <!--Swagger2-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>2.9.2</version>
         </dependency>
+        <!--Swagger-ui-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
